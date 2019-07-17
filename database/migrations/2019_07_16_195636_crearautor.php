@@ -18,7 +18,7 @@ class Crearautor extends Migration
             $table->string('nombre');
             $table->string('genero');
             $table->string('pais');
-            $table->timestamp();
+            $table->timestamps();
         });
     }
 
