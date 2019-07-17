@@ -13,7 +13,7 @@ class Crearautor extends Migration
      */
     public function up()
     {
-        Schema::create('autores', function (Blueprint $table) {
+        Schema::create('autors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             $table->string('genero');
@@ -29,6 +29,6 @@ class Crearautor extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('autores');
+        Schema::dropIfExists('autors');
     }
 }
