@@ -11,6 +11,12 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->get('/autores','AutorController@index');
+$router->post('/autores/{id}','AutorController@store');
+$router->get('/autores/{id}','AutorController@show');
+$router->put('/autores/{id}','AutorController@update');
+$router->patch('/autores/{id}','AutorController@store');
+$router->delete('/autores/{id}','AutorController@destroy');
+
+
+// Route::resource('/autors','AutorController');
