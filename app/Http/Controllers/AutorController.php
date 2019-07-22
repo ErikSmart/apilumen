@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\http\Request;
 use App\Autor;
 use App\Traits\ApiResponser;
-
+use Illuminate\Http\Response as HttpResponse;
+//use Illuminate\Support\Facades\Response;
 class AutorController extends Controller
 {
   use ApiResponser;
@@ -43,7 +44,18 @@ class AutorController extends Controller
     */
    public function store(Request $request)
    {
-     
+     $rules = [
+       'nombre' => 'required|max:30',
+       'genero' => 'required|max:10:|in:masculino,femenino',
+       'pais' => 'required|max:30'
+   ];
+
+   $this->validate($request, $rules);
+
+   $autores= Autor::create($request->all());
+
+   return $this->successResponse($autores, HttpResponse::HTTP_CREATED);
+
    }
 
    /**
@@ -54,7 +66,8 @@ class AutorController extends Controller
     */
    public function show($id)
    {
-
+      $id = Autor::findOrFail($id);
+      return $this->successResponse($id);
    }
 
    /**
@@ -77,7 +90,22 @@ class AutorController extends Controller
     */
    public function update(Request $request, $id)
    {
+     $rules = [
+       'nombre' => 'max:30',
+       'genero' => 'max:10:|in:masculino,femenino',
+       'pais' => 'max:30'
+   ];
 
+   $this->validate($request, $rules);
+    $id = Autor::findOrFail($id);
+
+    $id->fill($request->all());
+
+    if ($id->isClean()) {
+      return $this->errorResponse('Algo debe cambiar', HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
+    }
+    $id->save();
+    return $this->successResponse($id);
    }
 
    /**

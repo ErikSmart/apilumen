@@ -12,7 +12,7 @@
 */
 
 $router->get('/autores','AutorController@index');
-$router->post('/autores/{id}','AutorController@store');
+$router->post('/autores','AutorController@store');
 $router->get('/autores/{id}','AutorController@show');
 $router->put('/autores/{id}','AutorController@update');
 $router->patch('/autores/{id}','AutorController@store');
