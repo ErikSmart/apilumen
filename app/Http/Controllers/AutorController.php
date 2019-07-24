@@ -116,7 +116,9 @@ class AutorController extends Controller
     */
    public function destroy($id)
    {
-       //
+         $id = Autor::findOrFail($id);
+         $id->delete();
+         return $this->successResponse($id);
    }
 
     //
